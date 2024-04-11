@@ -1,0 +1,89 @@
+/* sidebar */
+
+.user-section {
+    display: flex;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: var(--primary-background-color);
+    color : white;
+    padding: 0 30px;
+    min-height: 100vh;
+    border-radius: 0 30px 30px 0;
+}
+
+.sidebar .profile-link {
+    padding-top: 30px;
+    display: flex;
+    gap: 24px;
+    margin-bottom: 50px;
+    align-items: center;
+}
+
+.sidebar .profile-link .user-icon {
+    width: 24px;
+}
+
+.sidebar .profile-link h1 {
+    color: white;
+}
+
+.sidebar .menu-title {
+    width: 8px;
+}
+
+.sidebar .menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 35px 0;
+}
+
+.sidebar .menu-list-link {
+    display: flex;
+    gap: 16px;
+    color: white;
+}
+
+.sidebar .logout-form {
+    margin-top: 0;
+}
+
+.sidebar .logout-form .logout-btn {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    color: white;
+    align-items: center;
+    gap: 16px;
+}
+
+/* main content */
+
+.main-content {
+    width: 100%;
+    background-color: var(--secondary-background-color);
+    padding: 0 5%;
+}
+
+.main-content .navbar {
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary-background-color);
+    border-radius: 9px;
+    padding: 9px 8%;
+}
+
+/* modal */
+
+.main-modal.invisible {
+    display: none;
+}
+
+.main-modal.visible {
+    display: flex;
+}

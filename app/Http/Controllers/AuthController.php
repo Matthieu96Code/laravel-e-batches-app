@@ -4,66 +4,68 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function __construct() {
-        $this->middleware('guest')->except('logout');
+
+    public function register(){
+
+        return view('auth.register');
     }
-
-    public function register() {
-        return view('auth/register');
-    }
-
-    public function registersave(Request $request) {
-        Validator::make($request->all(), [
-            'name' => 'required',
-            'password' => 'required|min:6|confirmed',
-        ])->validate();
-
-        User::create([
-            'name' => $request->name,
-            'password' => Hash::make($request->password),
-            'type' => "0"
+    
+    public function store(){
+        
+        $validated = request()->validate([
+            'name' => 'required|min:3|max:40|unique:users,name',
+            'password' => 'required|confirmed',
+            // 'email' => 'nullable',
         ]);
 
-        return redirect()->route('login');
-    }
+        User::create([
+            'name' => $validated['name'],
+            'password' => Hash::make($validated['password']),
+            // 'email' => $validated['email'],
+        ]);
 
-    public function login() {
-        return view('auth/login');
+        return redirect()->route('login')->with('success', 'Account created Successfully');
     }
-
-    public function loginAction(Request $request) {
-        Validator::make($request->all(), [
+    
+    public function login(){
+        
+        return view('auth.login');
+    }
+    
+    public function authenticate(){
+        
+        $validated = request()->validate([
             'name' => 'required',
             'password' => 'required',
-        ])->validate();
+        ]);
 
-        if (!Auth::attempt($request->only('name', 'password'), $request->boolean('remenber'))) {
-            throw ValidationException::withMessages([
-                'name' => trans('auth.failed')
-            ]);
+        if(auth()->attempt($validated)){
+            
+            request()->session()->regenerate();
+            
+            if(auth()->user()->role > 0 ) {
+            return redirect()->route('admin.dashboard')->with('success', 'Logged in Successfully');
+            }
+
+            return redirect()->route('')->with('success', 'Logged in Successfully');
         }
 
-        $request->session()->regenerate();
-
-        if (auth()->user()->type == 'admin') {
-            return redirect()->route('admin/home');
-        } else {
-            return redirect()->route('home');
-        }
+        return redirect()->route('login')->withErrors([
+            'email' => 'No matching user found with the provided email and password'
+        ]);
     }
 
-    public function logout(Request $request) {
-        Auth::guard('web')->logout();
+    public function logout(){
+        auth()->logout();
 
-        $request->session()->invalidate();
-
-        return redirect('/login');
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        
+        return redirect()->route('login')->with('success', 'Logged out Successfully');
     }
+
 }
