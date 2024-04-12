@@ -51,7 +51,7 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard')->with('success', 'Logged in Successfully');
             }
 
-            return redirect()->route('')->with('success', 'Logged in Successfully');
+            return redirect()->route('users.home')->with('success', 'Logged in Successfully');
         }
 
         return redirect()->route('login')->withErrors([

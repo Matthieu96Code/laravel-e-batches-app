@@ -129,6 +129,30 @@ a {
     background-color: var(--primary-button-hover-color);
 }
 
+.main-icon {
+    display: block;
+    width: 24px;
+}
+
+.del-btn,
+.add-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.add-icon {
+    color: green;
+}
+
+.edit-icon {
+    color: blue;
+}
+
+.del-icon {
+    color: red;
+}
+
 .main-table {
     width: 100%;
     background-color: var(--custom-background-light);
