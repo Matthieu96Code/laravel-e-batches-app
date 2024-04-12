@@ -19,12 +19,12 @@
             <tr class="main-tr batch-tr">
                 <td class="main-td batch-td"><a href="{{ route('batches.show', $batch->id) }}">{{ $batch->name }}</a></td>
                 <td class="main-td batch-td">{{ $batch->project->name }}</td>
-                <td class="main-td batch-td"><a href="{{ route('batches.edit', $batch->id) }}"><x-iconsax-lin-edit-2 /></a></td>
+                <td class="main-td batch-td"><a href="{{ route('batches.edit', $batch->id) }}"><span class="main-icon edit-icon"><x-iconsax-lin-edit-2 /></span></a></td>
                 <td class="main-td batch-td">
                     <form action="{{ route('batches.destroy', $batch->id) }}" method='POST'>
                         @csrf
                         @method('delete')
-                        <button class="del-btn batch-del-btn" type="button"><x-iconsax-lin-trash /></button>
+                        <button class="del-btn batch-del-btn" type="button"><span class="main-icon del-icon"><x-iconsax-lin-trash /></span></button>
                     </form>
                 </td>
             </tr>

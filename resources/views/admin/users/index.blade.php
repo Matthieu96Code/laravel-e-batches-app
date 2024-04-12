@@ -1,7 +1,7 @@
 @extends('layout.user-layout')
 
 @section('content')
-<h1 class="main-title">Liste des utilisateur</h1>
+<h1 class="main-title">Liste des utilisateurs</h1>
 
 <button class="main-btn add-user-btn"><a href="{{ route('users.create') }}">Add user</a></button>
 
@@ -33,7 +33,7 @@
                         @default                            
                     @endswitch
                 </td>
-                <td class="main-td user-td"><a href="{{ route('users.edit', $user->id) }}"><x-iconsax-lin-edit-2 /></a></td>
+                <td class="main-td user-td"><a href="{{ route('users.edit', $user->id) }}"><span class="main-icon edit-icon"><x-iconsax-lin-edit-2 /></span></a></td>
             </tr>
         @endforeach
     </tbody>

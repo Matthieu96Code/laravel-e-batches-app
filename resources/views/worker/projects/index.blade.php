@@ -17,12 +17,12 @@
             <tr class="main-tr project-tr">
                 <td class="main-td project-td"><a href="{{ route('projects.show', $project->id) }}">{{ $project->name }}</a></td>
                 <td class="main-td project-td">{{ $project->user->name }}</td>
-                <td class="main-td project-td"><a href="{{ route('projects.edit', $project->id) }}"><x-iconsax-lin-edit-2 /></a></td>
+                <td class="main-td project-td"><a href="{{ route('projects.edit', $project->id) }}"><span class="main-icon edit-icon"><x-iconsax-lin-edit-2 /></span></a></td>
                 <td class="main-td project-td">
                     <form action="{{ route('projects.destroy', $project->id) }}" method='post'>
                         @csrf
                         @method('delete')
-                        <button type="submit"><x-iconsax-lin-trash /></button>
+                        <button class="del-btn" type="submit"><span class="main-icon del-icon"><x-iconsax-lin-trash /></span></button>
                     </form>
                 </td>
             </tr>

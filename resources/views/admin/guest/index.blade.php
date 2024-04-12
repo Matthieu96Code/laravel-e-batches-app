@@ -20,15 +20,15 @@
                         @csrf
                         {{-- <input type="text" value="{{ $guest->name }}" name="name">
                         <input type="password" value="{{ $guest->password }}" name="password"> --}}
-                        <button type="submit">Ajouter</button>
+                        <button class="add-btn" type="submit"><span class="main-icon add-icon"><x-iconsax-two-archive-add /></span></button>
                     </form>
                 </td>
-                <td class="main-td guest-td"><a href="{{ route('guests.edit', $guest->id) }}"><x-iconsax-lin-edit-2 /></a></td>
+                <td class="main-td guest-td"><a href="{{ route('guests.edit', $guest->id) }}"><span class="main-icon edit-icon"><x-iconsax-lin-edit-2 /></span></a></td>
                 <td class="main-td guest-td">
                     <form action="{{ route('guests.destroy', $guest->id) }}" method='POST'>
                         @csrf
                         @method('delete')
-                        <button type="submit"><x-iconsax-lin-trash /></button>
+                        <button class="del-btn" type="submit"><span class="main-icon del-icon"><x-iconsax-lin-trash /></span></button>
                     </form>
                 </td>
             </tr>
