@@ -33,7 +33,7 @@
                         @default                            
                     @endswitch
                 </td>
-                <td class="main-td user-td"><a href="{{ route('users.edit', $user->id) }}">Edit</a></td>
+                <td class="main-td user-td"><a href="{{ route('users.edit', $user->id) }}"><x-iconsax-lin-edit-2 /></a></td>
             </tr>
         @endforeach
     </tbody>

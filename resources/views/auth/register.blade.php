@@ -36,11 +36,39 @@
                 <p>{{ message }}</p>
             @enderror
             <div class="main-form-group">
-                <button class="main-btn" type="submit">S'enregistrer</button>
+                <button class="main-btn register-btn" type="submit">S'enregistrer</button>
             </div>
             <div class="main-form-group login-redirection">
                 <p>Vous avez déjà un compte? <a href="{{ url('login') }}">se connecter</a></p>
             </div>
         </form>
     </div>
+
+    <div class="main-modal modal-container invisible" id="deleteModal">
+        <div class="modal-content">
+            <h3>Vous vous ête enregistre</h3>
+            <p>Vous devez patienté pour être validé, passer le delai de vingt-quatre (24) heures, votre enregistrement ne sera plus valable</p>
+            <div>
+                <button class="ok-btn" type="button"><a href="/">Ok</a></button>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('script')
+
+    <script>
+
+        const allBody = document.querySelector('body');
+        const notificationModal = document.querySelector('.main-modal');
+
+        const registerBtn = document.querySelector('.register-btn');
+        registerBtn.addEventListener('click', (e) => {
+            // e.preventDefault();
+            notificationModal.classList.toggle('invisible');
+            // delModal.classList.add('visible');
+        });
+
+    </script>
 @endsection

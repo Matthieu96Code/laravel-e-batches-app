@@ -164,3 +164,14 @@ thead.main-thead .main-tr {
     padding: 14px 0;
     color: var(--secondary-text-color);
 }
+
+
+/* modal */
+
+.main-modal.invisible {
+    display: none;
+}
+
+.main-modal.visible {
+    display: flex;
+}

@@ -14,31 +14,42 @@
     </thead>
     <tbody class="main-thead batch-thead">
         @foreach ($batches as $batch)
+
             @if ($batch->project->user->id === Auth::id())   
             <tr class="main-tr batch-tr">
                 <td class="main-td batch-td"><a href="{{ route('batches.show', $batch->id) }}">{{ $batch->name }}</a></td>
                 <td class="main-td batch-td">{{ $batch->project->name }}</td>
-                <td class="main-td batch-td"><a href="{{ route('batches.edit', $batch->id) }}">Edit</a></td>
+                <td class="main-td batch-td"><a href="{{ route('batches.edit', $batch->id) }}"><x-iconsax-lin-edit-2 /></a></td>
                 <td class="main-td batch-td">
                     <form action="{{ route('batches.destroy', $batch->id) }}" method='POST'>
                         @csrf
                         @method('delete')
-                        <button class="del-btn batch-del-btn" type="submit">Delete</button>
+                        <button class="del-btn batch-del-btn" type="button"><x-iconsax-lin-trash /></button>
                     </form>
                 </td>
             </tr>
             @endif
+
+            {{-- Modal form --}}
+
+            <div class="main-modal invisible" id="deleteModal">
+                <h3>êtes vous sûr de vouloir supprimez ce lot</h3>
+                <p>cet action serait irréverssible</p>
+                <div>
+                    <form action="{{ route('batches.destroy', $batch->id) }}" method='POST'>
+                        @csrf
+                        @method('delete')
+                        <button class="yes-btn" type="submit">Oui</button>
+                    </form>
+                    <button class="no-btn" type="button">Non</button>
+                </div>
+            </div>
+            
         @endforeach
     </tbody>
 </table>
 
-<button class="batch-del-btn-test" type="button">
-    Click me
-</button>
 
-<div class="main-modal invisible" id="deleteModal">
-    modal
-</div>
 
 @endsection
 
@@ -49,8 +60,9 @@
         const allBody = document.querySelector('body');
         const delModal = document.querySelector('.main-modal');
 
-        const btn = document.querySelector('.batch-del-btn-test');
-        btn.addEventListener('click', () => {
+        const btn = document.querySelector('.batch-del-btn');
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             delModal.classList.toggle('invisible');
             // delModal.classList.add('visible');
         });

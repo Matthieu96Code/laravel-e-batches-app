@@ -46,8 +46,11 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::resource('projects', ProjectController::class)->middleware(['auth', 'admin']);
 Route::resource('users', UserController::class)->middleware(['auth', 'admin']);
-Route::resource('guests', GuestController::class)->middleware(['auth', 'admin']);
 Route::put('/users/{user}/edit', [UserController::class, 'changePassword'])->name('users.changePassword')->middleware(['auth', 'admin']);;
+
+Route::resource('guests', GuestController::class);
+Route::post('/users/create/{guest}', [GuestController::class, 'moveToUser'])->name('guests.moveToUser')->middleware(['auth', 'admin']);
+
 
 
 

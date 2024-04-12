@@ -5,6 +5,7 @@
         <tr class="main-tr guest-tr">
             <th class="main-th guest-th">Nom d'utilisateur</th>
             <th class="main-th guest-th">Créer le</th>
+            <th class="main-th guest-th">Add</th>
             <th class="main-th guest-th">Modifier</th>
             <th class="main-th guest-th">Delete</th>
         </tr>
@@ -14,12 +15,20 @@
             <tr class="main-tr guest-tr">
                 <td class="main-td guest-td"><a href="{{ route('guests.show', $guest->id) }}">{{ $guest->name }}</a></td>
                 <td class="main-td guest-td">{{ $guest->created_at }}</td>
-                <td class="main-td guest-td"><a href="{{ route('guests.edit', $guest->id) }}">Edit</a></td>
                 <td class="main-td guest-td">
-                    <form action="{{ route('guest.destroy', $guest->id) }}" method='POST'>
+                    <form action="{{ route('guests.moveToUser', $guest->id) }}" method='POST'>
+                        @csrf
+                        {{-- <input type="text" value="{{ $guest->name }}" name="name">
+                        <input type="password" value="{{ $guest->password }}" name="password"> --}}
+                        <button type="submit">Ajouter</button>
+                    </form>
+                </td>
+                <td class="main-td guest-td"><a href="{{ route('guests.edit', $guest->id) }}"><x-iconsax-lin-edit-2 /></a></td>
+                <td class="main-td guest-td">
+                    <form action="{{ route('guests.destroy', $guest->id) }}" method='POST'>
                         @csrf
                         @method('delete')
-                        <button type="submit">Delete</button>
+                        <button type="submit"><x-iconsax-lin-trash /></button>
                     </form>
                 </td>
             </tr>

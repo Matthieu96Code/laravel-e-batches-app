@@ -59,6 +59,7 @@
     color: white;
     align-items: center;
     gap: 16px;
+    cursor: pointer;
 }
 
 /* main content */
@@ -76,14 +77,4 @@
     background-color: var(--primary-background-color);
     border-radius: 9px;
     padding: 9px 8%;
-}
-
-/* modal */
-
-.main-modal.invisible {
-    display: none;
-}
-
-.main-modal.visible {
-    display: flex;
 }
