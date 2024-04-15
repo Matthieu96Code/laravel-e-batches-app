@@ -117,12 +117,16 @@ a {
 
 .main-btn {
     background-color: var(--primary-button-color);
-    color: var(--custom-text-light);
     padding: 9px 0;
     border-radius: 6px;
     border: 1px solid var(--primary-button-color);
+    color: var(--custom-text-light);
     margin: 9px 0;
     cursor: pointer;
+}
+
+.main-btn a {
+    color: var(--custom-text-light);
 }
 
 .main-btn:hover {
@@ -192,10 +196,39 @@ thead.main-thead .main-tr {
 
 /* modal */
 
+.main-modal.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+}
+
+.main-modal .modal-content {
+    background-color: var(--custom-background-light);
+    border-radius: 12px;
+    margin: auto;
+    width: 30%;
+    max-width: 500px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.main-modal button {
+    width: 70px;
+}
+
 .main-modal.invisible {
     display: none;
 }
 
-.main-modal.visible {
+/* .main-modal.visible {
     display: flex;
-}
+} */

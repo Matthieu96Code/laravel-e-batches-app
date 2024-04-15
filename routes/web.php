@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CorrectionController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -28,15 +29,17 @@ Route::get('/dashboard', function () {
 })->name('admin.dashboard')->middleware(['auth', 'admin']);
 
 Route::group(['middleware' => 'guest'], function(){
+
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'store']);
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate']);
+    
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 // ->except(['index', 'show'])
-// ->except(['index', 'show'])
+// ->only(['index', 'show'])
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [UserController::class, 'home'])->name('users.home');
@@ -51,9 +54,9 @@ Route::put('/users/{user}/edit', [UserController::class, 'changePassword'])->nam
 Route::resource('guests', GuestController::class);
 Route::post('/users/create/{guest}', [GuestController::class, 'moveToUser'])->name('guests.moveToUser')->middleware(['auth', 'admin']);
 
-
-
-
 Route::resource('batches', BatchController::class)->middleware(['auth']);
-Route::resource('batches.corrections', CorrectionController::class)->shallow()->middleware(['auth']);
+Route::resource('batches.corrections', CorrectionController::class)->shallow()->middleware(['auth'])->except(['create', 'index']);
+// Route::post('/batches/{batch}', [CorrectionController::class, 'store'])->middleware(['auth'])->name('batches.corrections.store');
 
+// Route::resource('messages', MessageController::class)->only(['store', 'update', 'destroy'])->middleware('auth');
+Route::post('/corrections/{correction}', [MessageController::class, 'store'])->middleware(['auth'])->name('corrections.messages.store');

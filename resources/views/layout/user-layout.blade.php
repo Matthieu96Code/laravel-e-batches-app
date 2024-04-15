@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{url('css/app.css')}}">
     <link rel="stylesheet" href="{{url('css/layout.css')}}">
     <link rel="stylesheet" href="{{url('css/user.css')}}">
+    <script src="{{url('js/fabricjs.js')}}"></script>
     <!-- {{-- <script src="https://cdn.tailwindcss.com"></script> --}} -->
 </head>
 <body>

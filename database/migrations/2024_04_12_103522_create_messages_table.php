@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('corrections', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('name');
-            $table->foreignId('batch_id')->constrained()->cascadeOnDelete();
+
+            $table->longText('content');
+            $table->string('type');
+            $table->string('imagePath')->nullable();
+            $table->foreignId('correction_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('corrections');
+        Schema::dropIfExists('messages');
     }
 };

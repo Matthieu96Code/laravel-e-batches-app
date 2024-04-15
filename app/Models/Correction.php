@@ -11,11 +11,14 @@ class Correction extends Model
 
     protected $fillable = [
         'name',
-        'content',
         'batch_id',
     ];
 
     public function batch () {
         return $this->belongsTo(Batch::class);
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
     }
 }

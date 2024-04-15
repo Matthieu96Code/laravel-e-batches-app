@@ -24,27 +24,22 @@ class CorrectionController extends Controller
         return view('client.corrections.create', compact('batch'));
     }
 
-    // public function store(Batch $batch) {
+    public function store(Batch $batch) {
 
-    //     return dd($batch);
-    //     return dd(request());
+        $validated = request()->validate([
+            'name' => 'required|min:3',
+            'batch_id' => 'nullable',
+        ]);
 
-    //     $validated = request()->validate([
-    //         'name' => 'required|min:3',
-    //         'batch_id' => 'required',
-    //     ]);
+        Correction::create([
+            'name' => $validated['name'],
+            'batch_id' => $batch->id,
+        ]);
 
-    //     $validated([
-    //         'batch_id' => $batch->id
-    //     ]);
+        return redirect()->route('batches.show', $batch->id);
+    }
 
-    //     $description = $dom->saveHTML();
-
-    //     Correction::create($validated);
-
-    //     return redirect()->route('corrections.index');
-    // }
-
+    /*
     public function store(Batch $batch) {
         
         $content = request()->content;
@@ -89,7 +84,8 @@ class CorrectionController extends Controller
         // return dd($correction);
 
         return redirect()->route('batches.corrections.index', $batch->id);
-    }
+    } 
+    */
 
     public function show(Correction $correction) {
 
